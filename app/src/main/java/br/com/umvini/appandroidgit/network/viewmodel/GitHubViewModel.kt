@@ -54,17 +54,16 @@ class GitHubViewModel: ViewModel() {
     private fun afterGetGitHubRepositories(resultApi: Response<GitHubItemRepository>){
         when {
             resultApi.isSuccessful -> {
-                event.value = resultApi.body()?.let {
+                event.postValue(resultApi.body()?.let {
                     GitHubEvent.GetRepositoriesSuccessfully(
                         it
-                    )
-                }
+                    ) } )
             }
 
             else -> {
-                event.value = GitHubEvent.GetRepositoriesError
+                event.postValue(GitHubEvent.GetRepositoriesError)
             }
         }
-        state.value = GitHubState.EndLoading
+        state.postValue(GitHubState.EndLoading)
     }
 }

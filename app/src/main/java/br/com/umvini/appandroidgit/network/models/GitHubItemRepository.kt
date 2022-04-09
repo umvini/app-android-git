@@ -1,9 +1,6 @@
 package br.com.umvini.appandroidgit.network.models
 
-import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
-
 
 data class GitHubItemRepository(
     @SerializedName("total_count")
