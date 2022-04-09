@@ -4,8 +4,8 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
-@Parcelize
-data class GitHubRepository(
+
+data class GitHubItemRepository(
     @SerializedName("total_count")
     val totalCount: Int,
 
@@ -14,9 +14,9 @@ data class GitHubRepository(
 
     @SerializedName("items")
     val items: List<Item>
-): Parcelable
+)
 
-@Parcelize
+
 data class Item (
     @SerializedName("id")
     val id: Int,
@@ -243,7 +243,7 @@ data class Item (
     @SerializedName("open_issues")
     val openIssues: Int,
 
-    @SerializedName("forks")
+    @SerializedName("watchers")
     val watchers: Int,
 
     @SerializedName("default_branch")
@@ -251,9 +251,9 @@ data class Item (
 
     @SerializedName("score")
     val score: Int
-): Parcelable
+)
 
-@Parcelize
+
 data class License (
 
     @SerializedName("key")
@@ -270,9 +270,9 @@ data class License (
 
     @SerializedName("node_id")
     val nodeID: String
-): Parcelable
+)
 
-@Parcelize
+
 data class Owner (
 
     @SerializedName("login")
@@ -328,4 +328,4 @@ data class Owner (
 
     @SerializedName("site_admin")
     val siteAdmin: Boolean
-): Parcelable
+)
