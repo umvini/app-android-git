@@ -25,7 +25,7 @@ class GitHubViewModel: ViewModel() {
 
     val viewEvent: LiveData<GitHubEvent>
         get() = event
-    val viewstate: LiveData<GitHubState>
+    val viewState: LiveData<GitHubState>
         get() = state
 
     public fun interpret(interpret: GitHubInterpret){
