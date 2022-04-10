@@ -50,11 +50,15 @@ dependencies {
 
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+
     // LiveData
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
 
     //Lottie Animation
     implementation "com.airbnb.android:lottie:3.4.0"
+
+    //Recyclerview
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

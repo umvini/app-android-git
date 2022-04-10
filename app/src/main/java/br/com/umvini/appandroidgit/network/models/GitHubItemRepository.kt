@@ -10,11 +10,11 @@ data class GitHubItemRepository(
     val incompleteResults: Boolean,
 
     @SerializedName("items")
-    val items: List<Item>
+    val items: List<RepositoryItem>
 )
 
 
-data class Item (
+data class RepositoryItem (
     @SerializedName("id")
     val id: Int,
 
