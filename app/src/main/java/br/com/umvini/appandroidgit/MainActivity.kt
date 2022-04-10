@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var adapter: GitHubItemRepositoryAdapter
 
-    var isLoading = true
+    var isLoading = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,6 +76,14 @@ class MainActivity : AppCompatActivity() {
                 is GitHubEvent.GetRepositoriesError -> {
 
                 }
+
+                is GitHubEvent.GetMoreRepositoriesSuccessfully -> {
+                    adapter.addRepositories(event.response.items)
+                    isLoading = false
+                }
+                is GitHubEvent.GetMoreRepositoriesError -> {
+
+                }
             }
         })
     }
@@ -102,6 +110,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadMoreRepositories() {
-
+        viewModel.interpret(GitHubInterpret.GetMoreRepositories)
     }
 }

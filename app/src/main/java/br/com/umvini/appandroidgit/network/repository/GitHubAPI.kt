@@ -10,6 +10,7 @@ interface GitHubAPI {
     suspend fun getRepositories(
         @Query("q") q: String,
         @Query("sort") sort: String,
-        @Query("order") order: String
+        @Query("order") order: String,
+        @Query("page") page: String
     ) : Response<GitHubItemRepository>
 }

@@ -14,7 +14,7 @@ import br.com.umvini.appandroidgit.R
 import br.com.umvini.appandroidgit.network.models.RepositoryItem
 import java.util.concurrent.Executors
 
-class GitHubItemRepositoryAdapter(private val mList: List<RepositoryItem>): RecyclerView.Adapter<GitHubItemRepositoryAdapter.ViewHolder>() {
+class GitHubItemRepositoryAdapter(private var mList: List<RepositoryItem>): RecyclerView.Adapter<GitHubItemRepositoryAdapter.ViewHolder>() {
 
     // create new views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -71,5 +71,10 @@ class GitHubItemRepositoryAdapter(private val mList: List<RepositoryItem>): Recy
                 e.printStackTrace()
             }
         }
+    }
+
+    fun addRepositories(itens: List<RepositoryItem>) {
+        mList += itens
+        notifyItemInserted(mList.size)
     }
 }

@@ -20,6 +20,19 @@ import retrofit2.Retrofit
 
 
 class GitHubViewModel: ViewModel() {
+
+    companion object {
+        const val PARAM_MIN_STARS = "stars:>=10000"
+        const val PARAM_SORTS = "stars"
+        const val PARAM_ORDER = "desc"
+    }
+
+    val retrofitClient: Retrofit = NetworkUtils
+        .getRetrofitInstance("https://api.github.com/search/")
+    val api = retrofitClient.create(GitHubAPI::class.java)
+
+    val repo = GitHubRepository(api)
+
     private val event = MutableLiveData<GitHubEvent>()
     private val state = MutableLiveData<GitHubState>()
 
@@ -28,10 +41,16 @@ class GitHubViewModel: ViewModel() {
     val viewState: LiveData<GitHubState>
         get() = state
 
+    var page = 1
+
     public fun interpret(interpret: GitHubInterpret){
         when (interpret) {
             is GitHubInterpret.GetRepositories -> {
                 getGitHubRepositories()
+            }
+
+            is GitHubInterpret.GetMoreRepositories -> {
+                getGitHubMoreRepositories()
             }
         }
     }
@@ -39,13 +58,8 @@ class GitHubViewModel: ViewModel() {
     private fun getGitHubRepositories() {
         state.value = GitHubState.ShowLoading
 
-        val retrofitClient: Retrofit = NetworkUtils
-            .getRetrofitInstance("https://api.github.com/search/")
-        val api = retrofitClient.create(GitHubAPI::class.java)
-
-        val repo = GitHubRepository(api)
         viewModelScope.launch(Dispatchers.IO) {
-            val resultApi = repo.getRepositories("stars:>=10000", "stars", "desc")
+            val resultApi = repo.getRepositories(PARAM_MIN_STARS, PARAM_SORTS, PARAM_ORDER, page.toString())
 
             afterGetGitHubRepositories(resultApi)
         }
@@ -62,6 +76,32 @@ class GitHubViewModel: ViewModel() {
 
             else -> {
                 event.postValue(GitHubEvent.GetRepositoriesError)
+            }
+        }
+        state.postValue(GitHubState.EndLoading)
+    }
+
+    private fun getGitHubMoreRepositories() {
+        state.value = GitHubState.ShowLoading
+        page += 1
+        viewModelScope.launch(Dispatchers.IO) {
+            val resultApi = repo.getRepositories(PARAM_MIN_STARS, PARAM_SORTS, PARAM_ORDER, page.toString())
+
+            afterGetGitHubMoreRepositories(resultApi)
+        }
+    }
+
+    private fun afterGetGitHubMoreRepositories(resultApi: Response<GitHubItemRepository>){
+        when {
+            resultApi.isSuccessful -> {
+                event.postValue(resultApi.body()?.let {
+                    GitHubEvent.GetMoreRepositoriesSuccessfully(
+                        it
+                    ) } )
+            }
+
+            else -> {
+                event.postValue(GitHubEvent.GetMoreRepositoriesError)
             }
         }
         state.postValue(GitHubState.EndLoading)
