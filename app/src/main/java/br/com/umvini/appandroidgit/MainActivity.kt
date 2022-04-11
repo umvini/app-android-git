@@ -15,9 +15,11 @@ import br.com.umvini.appandroidgit.network.viewmodel.auxiliaries.GitHubInterpret
 import br.com.umvini.appandroidgit.network.viewmodel.auxiliaries.GitHubState
 import com.airbnb.lottie.LottieAnimationView
 import androidx.annotation.NonNull
-
-
-
+import androidx.lifecycle.ViewModel
+import br.com.umvini.appandroidgit.network.repository.GitHubAPI
+import br.com.umvini.appandroidgit.network.repository.GitHubRepository
+import br.com.umvini.appandroidgit.network.utils.NetworkUtils
+import retrofit2.Retrofit
 
 class MainActivity : AppCompatActivity() {
     lateinit var animationView: LottieAnimationView

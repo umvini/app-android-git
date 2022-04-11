@@ -43,7 +43,7 @@ class GitHubViewModel: ViewModel() {
 
     var page = 1
 
-    public fun interpret(interpret: GitHubInterpret){
+    fun interpret(interpret: GitHubInterpret){
         when (interpret) {
             is GitHubInterpret.GetRepositories -> {
                 getGitHubRepositories()

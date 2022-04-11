@@ -12,6 +12,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.umvini.appandroidgit.R
 import br.com.umvini.appandroidgit.network.models.RepositoryItem
+import br.com.umvini.appandroidgit.utils.Utils
 import java.util.concurrent.Executors
 
 class GitHubItemRepositoryAdapter(private var mList: List<RepositoryItem>): RecyclerView.Adapter<GitHubItemRepositoryAdapter.ViewHolder>() {
@@ -29,10 +30,10 @@ class GitHubItemRepositoryAdapter(private var mList: List<RepositoryItem>): Recy
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val itemRepository = mList[position]
 
-        holder.tvRepoName.text = itemRepository.fullName
-        holder.tvRepostars.text = itemRepository.stargazersCount.toString()
-        holder.tvRepoFork.text = itemRepository.forks.toString()
-        holder.tvAuthorName.text = itemRepository.name
+        holder.tvRepoName.text = Utils.stringIsNullReturnUnderscore(itemRepository.fullName)
+        holder.tvRepostars.text = Utils.intIsNullReturnUnderscore(itemRepository.stargazersCount)
+        holder.tvRepoFork.text = Utils.intIsNullReturnUnderscore(itemRepository.forks)
+        holder.tvAuthorName.text = Utils.stringIsNullReturnUnderscore(itemRepository.name)
         getImage(holder.ivPhotoAuthor, itemRepository.owner.avatarURL)
     }
 

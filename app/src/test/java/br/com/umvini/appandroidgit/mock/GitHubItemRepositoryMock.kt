@@ -1,0 +1,97 @@
+package br.com.umvini.appandroidgit.mock
+
+import br.com.umvini.appandroidgit.network.models.GitHubItemRepository
+import br.com.umvini.appandroidgit.network.models.License
+import br.com.umvini.appandroidgit.network.models.Owner
+import br.com.umvini.appandroidgit.network.models.RepositoryItem
+
+val owner = Owner("default", 1, "default", "default", "default", "default", "default", "default", "default", "default", "default", "default", "default", "default", "default", "default", "default", true)
+
+val license = License("default", "default", "default", "default", "default")
+
+val repository = RepositoryItem(
+    id = 1,
+    nodeID = "default",
+    name = "default",
+    fullName = "default",
+    private = true,
+    owner = owner,
+    "default",
+    "default",
+    true,
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    "default",
+    1,
+    1,
+    1,
+    "default",
+    hasIssues = true,
+    hasProjects = true,
+    hasDownloads = true,
+    hasWiki = true,
+    hasPages = true,
+    forksCount = 1,
+    mirrorURL = "default",
+    archived = true,
+    disabled = true,
+    openIssuesCount = 1,
+    license = license,
+    allowForking = true,
+    isTemplate = true,
+    topics = listOf(),
+    visibility = "default",
+    forks = 1,
+    openIssues = 1,
+    watchers = 1,
+    defaultBranch = "default",
+    score = 1
+)
+
+val gitHubItemRepository = GitHubItemRepository(
+    totalCount = 1,
+    incompleteResults = true,
+    items = listOf(repository)
+)
